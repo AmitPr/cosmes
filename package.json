@@ -4,7 +4,6 @@
   "private": false,
   "sideEffects": false,
   "type": "module",
-  "module": "esnext",
   "files": [
     "src"
   ],
