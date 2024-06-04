@@ -7,7 +7,7 @@
  */
 
 import { spawnSync } from "child_process";
-import degit from "degit";
+import * as degit from "degit";
 import {
   mkdirSync,
   readFileSync,

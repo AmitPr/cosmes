@@ -2,9 +2,9 @@
   "name": "cosmes",
   "version": "0.0.69",
   "private": false,
-  "packageManager": "pnpm@8.3.0",
   "sideEffects": false,
   "type": "module",
+  "module": "esnext",
   "files": [
     "src"
   ],
