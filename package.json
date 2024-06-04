@@ -6,27 +6,26 @@
   "sideEffects": false,
   "type": "module",
   "files": [
-    "src",
-    "dist"
+    "src"
   ],
   "exports": {
-    "./client": "./dist/client/index.js",
-    "./codec": "./dist/codec/index.js",
-    "./protobufs": "./dist/protobufs/index.js",
-    "./registry": "./dist/registry/index.js",
-    "./wallet": "./dist/wallet/index.js"
+    "./client": "./src/client/index.js",
+    "./codec": "./src/codec/index.js",
+    "./protobufs": "./src/protobufs/index.js",
+    "./registry": "./src/registry/index.js",
+    "./wallet": "./src/wallet/index.js"
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "pnpm clean && tsc && tsc-alias",
+    "build": "bun clean && tsc && tsc-alias",
     "dev": "concurrently \"tsc -w\" \"tsc-alias -w\"",
     "gen:protobufs": "node scripts/gen-protobufs.mjs",
     "gen:registry": "node scripts/gen-registry.mjs",
     "lint": "eslint **/*.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest --run",
-    "test:suite": "pnpm lint && pnpm typecheck && pnpm test",
-    "prepublishOnly": "pnpm build"
+    "test:suite": "bun lint && bun typecheck && bun test",
+    "prepublishOnly": "bun build"
   },
   "peerDependencies": {
     "@bufbuild/protobuf": "1.2.0",
