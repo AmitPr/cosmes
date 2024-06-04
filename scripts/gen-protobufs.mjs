@@ -51,21 +51,9 @@ const REPOS = [
     paths: ["proto"],
   },
   {
-    repo: "osmosis-labs/osmosis#main",
+    repo: "Team-Kujira/core#v1.0.2",
     paths: ["proto"],
-  },
-  {
-    repo: "InjectiveLabs/sdk-go#master",
-    paths: ["proto"],
-  },
-  {
-    repo: "evmos/ethermint#main",
-    paths: ["proto"],
-  },
-  {
-    repo: "dymensionxyz/osmosis#main-dym",
-    paths: ["proto"],
-  },
+  }
 ];
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -94,16 +82,13 @@ console.log("Generating TS files from proto files...");
   for (const { repo, paths } of REPOS) {
     for (const path of paths) {
       spawnSync(
-        "pnpm",
+        "bun",
         [
           "buf",
           "generate",
           join(TMP_DIR, id(repo), path),
           "--output",
-          join(
-            PROTOBUFS_DIR,
-            repo.startsWith("dymensionxyz") ? "dymension" : ""
-          ),
+          PROTOBUFS_DIR,
         ],
         {
           cwd: process.cwd(),
@@ -115,28 +100,28 @@ console.log("Generating TS files from proto files...");
   }
 }
 
-console.log("Flattening dymension protobufs...");
-{
-  // Move all dirs in protobufs/dymension/osmosis out into protobufs/dymension
-  const dymensionDir = join(PROTOBUFS_DIR, "dymension");
-  const dymensionOsmosisDir = join(dymensionDir, "osmosis");
-  // Move all subdirs up one level
-  readdirSync(dymensionOsmosisDir).forEach((file) => {
-    const currentFile = join(dymensionOsmosisDir, file);
-    const stats = statSync(currentFile);
-    if (stats.isDirectory()) {
-      renameSync(currentFile, join(dymensionDir, file));
-    }
-  });
-  // Remove all empty dirs
-  readdirSync(dymensionDir).forEach((file) => {
-    const currentFile = join(dymensionDir, file);
-    const stats = statSync(currentFile);
-    if (stats.isDirectory() && stats.size === 0) {
-      rmSync(currentFile, { recursive: true, force: true });
-    }
-  });
-}
+// console.log("Flattening dymension protobufs...");
+// {
+//   // Move all dirs in protobufs/dymension/osmosis out into protobufs/dymension
+//   const dymensionDir = join(PROTOBUFS_DIR, "dymension");
+//   const dymensionOsmosisDir = join(dymensionDir, "osmosis");
+//   // Move all subdirs up one level
+//   readdirSync(dymensionOsmosisDir).forEach((file) => {
+//     const currentFile = join(dymensionOsmosisDir, file);
+//     const stats = statSync(currentFile);
+//     if (stats.isDirectory()) {
+//       renameSync(currentFile, join(dymensionDir, file));
+//     }
+//   });
+//   // Remove all empty dirs
+//   readdirSync(dymensionDir).forEach((file) => {
+//     const currentFile = join(dymensionDir, file);
+//     const stats = statSync(currentFile);
+//     if (stats.isDirectory() && stats.size === 0) {
+//       rmSync(currentFile, { recursive: true, force: true });
+//     }
+//   });
+// }
 
 console.log("Generating src/index.ts file and renaming exports...");
 {
@@ -194,21 +179,21 @@ console.log("Generating src/index.ts file and renaming exports...");
   writeFileSync(join(PROTOBUFS_DIR, "index.ts"), contents);
 }
 
-console.log("Rewriting Injective's legacy CosmWasm dependencies...");
-{
-  const path = join(
-    PROTOBUFS_DIR,
-    "injective",
-    "wasmx",
-    "v1",
-    "proposal_pb.ts"
-  );
-  const contents = readFileSync(path, "utf8").replace(
-    "proposal_pb.js",
-    "proposal_legacy_pb.js"
-  );
-  writeFileSync(path, contents);
-}
+// console.log("Rewriting Injective's legacy CosmWasm dependencies...");
+// {
+//   const path = join(
+//     PROTOBUFS_DIR,
+//     "injective",
+//     "wasmx",
+//     "v1",
+//     "proposal_pb.ts"
+//   );
+//   const contents = readFileSync(path, "utf8").replace(
+//     "proposal_pb.js",
+//     "proposal_legacy_pb.js"
+//   );
+//   writeFileSync(path, contents);
+// }
 
 console.log("Cleaning up...");
 {
