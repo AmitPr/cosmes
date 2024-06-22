@@ -3,7 +3,6 @@ import type { CosmosBaseV1beta1Coin as Coin } from "cosmes/protobufs";
 
 import type { WalletName } from "../constants/WalletName";
 import { WalletType } from "../constants/WalletType";
-import { WalletConnectV1 } from "../walletconnect/WalletConnectV1";
 import { WalletConnectV2 } from "../walletconnect/WalletConnectV2";
 import type { ConnectedWallet } from "./ConnectedWallet";
 
@@ -15,10 +14,6 @@ export type ChainInfo<T extends string> = {
    * The unique identifier for the chain (eg. `phoenix-1`).
    */
   chainId: T;
-  /**
-   * A valid RPC endpoint that can be used to simulate and broadcast transactions.
-   */
-  rpc: string;
   /**
    * The current gas price of the chain.
    */
@@ -180,7 +175,7 @@ export abstract class WalletController {
     chains: ChainInfo<T>[]
   ): Promise<{
     wallets: Map<T, ConnectedWallet>;
-    wc: WalletConnectV1 | WalletConnectV2;
+    wc: WalletConnectV2;
   }>;
 
   protected abstract registerAccountChangeHandlers(): void;

@@ -7,12 +7,11 @@ export type GetNativeBalancesParams = {
 };
 
 export async function getNativeBalances(
-  endpoint: string,
+  rpc: RpcClient,
   params: GetNativeBalancesParams
 ) {
   // TODO: handle pagination
-  const { balances } = await RpcClient.query(
-    endpoint,
+  const { balances } = await rpc.query(
     QueryAllBalancesService,
     params
   );

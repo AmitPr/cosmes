@@ -17,6 +17,7 @@ export {
 } from "./apis/simulateKujiraSinglePoolSwap";
 export { simulateTx, type SimulateTxParams } from "./apis/simulateTx";
 export { RpcClient } from "./clients/RpcClient";
+export type { RpcStatusResponse, RpcNodeInfo, RpcSyncInfo, RpcValidatorInfo, RpcPubkey } from './clients/types/rpc';
 export { type Adapter } from "./models/Adapter";
 export { MsgExecuteContract } from "./models/MsgExecuteContract";
 export { MsgInstantiateContract } from "./models/MsgInstantiateContract";

@@ -1,3 +1,4 @@
+import { RpcClient } from "../clients/RpcClient";
 import { queryContract } from "./queryContract";
 
 export type GetCw20BalanceParams = {
@@ -10,11 +11,11 @@ type Response = {
 };
 
 export async function getCw20Balance(
-  endpoint: string,
+  rpc: RpcClient,
   { address, token }: GetCw20BalanceParams
 ): Promise<bigint> {
   try {
-    const { balance } = await queryContract<Response>(endpoint, {
+    const { balance } = await queryContract<Response>(rpc, {
       address: token,
       query: {
         balance: {

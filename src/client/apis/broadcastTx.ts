@@ -12,8 +12,8 @@ export type BroadcastTxParams = Prettify<
  * Broadcasts a tx to the network and returns the tx hash if successful.
  */
 export async function broadcastTx(
-  endpoint: string,
+  rpc: RpcClient,
   { tx, ...params }: BroadcastTxParams
 ) {
-  return RpcClient.broadcastTx(endpoint, tx.toSignedProto(params));
+  return rpc.broadcastTx(tx.toSignedProto(params));
 }

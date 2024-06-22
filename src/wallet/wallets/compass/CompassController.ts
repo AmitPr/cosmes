@@ -3,7 +3,6 @@ import { Secp256k1PubKey } from "cosmes/client";
 import { WalletName } from "../../constants/WalletName";
 import { WalletType } from "../../constants/WalletType";
 import { onWindowEvent } from "../../utils/window";
-import { WalletConnectV1 } from "../../walletconnect/WalletConnectV1";
 import { WalletConnectV2 } from "../../walletconnect/WalletConnectV2";
 import { ConnectedWallet } from "../ConnectedWallet";
 import { ChainInfo, WalletController } from "../WalletController";
@@ -24,7 +23,7 @@ export class CompassController extends WalletController {
     _chains: ChainInfo<T>[]
   ): Promise<{
     wallets: Map<T, ConnectedWallet>;
-    wc: WalletConnectV1 | WalletConnectV2;
+    wc: WalletConnectV2;
   }> {
     // Compass does not support WC yet
     throw new Error("WalletConnect not supported");
@@ -37,7 +36,7 @@ export class CompassController extends WalletController {
       throw new Error("Compass extension is not installed");
     }
     await WalletError.wrap(ext.enable(chains.map(({ chainId }) => chainId)));
-    for (const { chainId, rpc, gasPrice } of Object.values(chains)) {
+    for (const { chainId, gasPrice } of Object.values(chains)) {
       const { bech32Address, pubKey, isNanoLedger } = await WalletError.wrap(
         ext.getKey(chainId)
       );
@@ -53,7 +52,6 @@ export class CompassController extends WalletController {
           chainId,
           key,
           bech32Address,
-          rpc,
           gasPrice,
           isNanoLedger
         )

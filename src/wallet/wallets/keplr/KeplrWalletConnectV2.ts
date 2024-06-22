@@ -30,7 +30,6 @@ export class KeplrWalletConnectV2 extends ConnectedWallet {
     chainId: string,
     pubKey: Secp256k1PubKey,
     address: string,
-    rpc: string,
     gasPrice: PlainMessage<Coin>,
     useAmino: boolean
   ) {
@@ -40,7 +39,6 @@ export class KeplrWalletConnectV2 extends ConnectedWallet {
       chainId,
       pubKey,
       address,
-      rpc,
       gasPrice
     );
     this.wc = wc;
@@ -54,6 +52,7 @@ export class KeplrWalletConnectV2 extends ConnectedWallet {
   }
 
   public async signAndBroadcastTx(
+    rpc: RpcClient,
     { msgs, memo, timeoutHeight }: UnsignedTx,
     fee: Fee,
     accountNumber: bigint,
@@ -85,6 +84,6 @@ export class KeplrWalletConnectV2 extends ConnectedWallet {
       txRaw = tx.toSignedDirect(signed, signature.signature);
     }
 
-    return RpcClient.broadcastTx(this.rpc, txRaw);
+    return rpc.broadcastTx(txRaw);
   }
 }

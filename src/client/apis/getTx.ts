@@ -12,8 +12,8 @@ export type GetTxParams = {
 /**
  * Returns the tx matching the given hash. Throws if the tx is not found.
  */
-export async function getTx(endpoint: string, params: GetTxParams) {
-  const res = await RpcClient.query(endpoint, GetTxService, params);
+export async function getTx(rpc: RpcClient, params: GetTxParams) {
+  const res = await rpc.query(GetTxService, params);
   if (!res.tx || !res.txResponse) {
     throw new Error("Tx not found");
   }

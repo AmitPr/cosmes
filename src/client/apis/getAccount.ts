@@ -6,9 +6,8 @@ export type GetAccountParams = {
   address: string;
 };
 
-export async function getAccount(endpoint: string, params: GetAccountParams) {
-  const { account } = await RpcClient.query(
-    endpoint,
+export async function getAccount(rpc: RpcClient, params: GetAccountParams) {
+  const { account } = await rpc.query(
     QueryAccountService,
     params
   );

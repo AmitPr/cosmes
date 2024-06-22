@@ -1,3 +1,4 @@
+import { RpcClient } from "../clients/RpcClient";
 import { wait } from "../utils/wait";
 import { getTx } from "./getTx";
 
@@ -13,13 +14,13 @@ export type PollTxParams = {
  * of `maxAttempts`.
  */
 export async function pollTx(
-  endpoint: string,
+  rpc: RpcClient,
   { intervalSeconds = 2, maxAttempts = 64, ...getTxParams }: PollTxParams
 ) {
   const intervalMillis = intervalSeconds * 1000;
   for (let i = 0; i < maxAttempts; i++) {
     try {
-      return await getTx(endpoint, getTxParams);
+      return await getTx(rpc, getTxParams);
     } catch (err) {
       await wait(intervalMillis);
     }

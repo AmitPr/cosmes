@@ -5,10 +5,18 @@ import { qrcodegen } from "./qrcodegen";
 
 export type MobileAppDetails = {
   name: string;
-  android: string;
-  ios: string;
-  isStation?: boolean | undefined;
+  android?: string | undefined;
+  ios?: string | undefined;
 };
+
+export function shouldDeepLink(details: MobileAppDetails): boolean {
+  if (isAndroid() && details.android) {
+    return true;
+  } else if (isMobile() && details.ios) {
+    return true;
+  }
+  return false;
+}
 
 export class QRCodeModal implements IQRCodeModal {
   private readonly id = "wc-modal-" + Date.now();
@@ -48,17 +56,12 @@ export class QRCodeModal implements IQRCodeModal {
       "border-radius: 0.5rem",
     ].join(";");
 
-    const schemeUri = this.details.isStation
-      ? `https://terrastation.page.link/?link=https://terra.money?${encodeURIComponent(
-          `action=wallet_connect&payload=${encodeURIComponent(uri)}`
-        )}&apn=money.terra.station&ibi=money.terra.station&isi=1548434735`
-      : uri;
     const qr = qrcodegen.QrCode.encodeText(
-      schemeUri,
+      uri,
       qrcodegen.QrCode.Ecc.MEDIUM
     );
     const canvas = document.createElement("canvas");
-    const scale = this.details.isStation ? 3.7 : 5;
+    const scale = 5;
     canvas.width = qr.size * scale;
     canvas.height = canvas.width;
     const ctx = canvas.getContext("2d");
@@ -73,16 +76,14 @@ export class QRCodeModal implements IQRCodeModal {
       }
     }
 
-    if (isMobile()) {
-      // On mobile, redirect to mobile app
-      window.location.href = this.details.isStation
-        ? schemeUri
-        : isAndroid()
-        ? this.generateAndroidIntent(uri)
-        : this.generateIosIntent(uri);
+    if (shouldDeepLink(this.details)) {
+      // Redirect to mobile app if deeplinks supported by wallet.
+      window.location.href = isAndroid() ?
+        this.generateAndroidIntent(uri) :
+        this.generateIosIntent(uri);
       // TODO: render button to open mobile app
     } else {
-      // On desktop, show help message to scan the QR code
+      // On desktop (or mobile without deeplinks), show help message to scan the QR code
       const msg = document.createElement("div");
       msg.textContent = `Scan via ${this.details.name} mobile app`;
       msg.style.cssText = [
@@ -112,6 +113,9 @@ export class QRCodeModal implements IQRCodeModal {
   }
 
   private generateAndroidIntent(uri: string): string {
+    if (!this.details.android) {
+      throw new Error("Android intent not provided");
+    }
     const hashIndex = this.details.android.indexOf("#");
     return (
       this.details.android.slice(0, hashIndex) +
@@ -122,6 +126,9 @@ export class QRCodeModal implements IQRCodeModal {
   }
 
   private generateIosIntent(uri: string): string {
+    if (!this.details.ios) {
+      throw new Error("iOS intent not provided");
+    }
     return this.details.ios + "?" + encodeURIComponent(uri);
   }
 }

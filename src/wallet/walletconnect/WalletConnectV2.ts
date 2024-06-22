@@ -3,7 +3,7 @@ import { SignDoc, StdSignDoc } from "cosmes/registry";
 import { debounce } from "lodash-es";
 
 import { isAndroid, isMobile } from "../utils/os";
-import { MobileAppDetails, QRCodeModal } from "./QRCodeModal";
+import { MobileAppDetails, QRCodeModal, shouldDeepLink } from "./QRCodeModal";
 
 /** The JSON data stored in `localStorage` to recover previous sessions. */
 type StorageSession = {
@@ -73,7 +73,7 @@ export class WalletConnectV2 {
     this.signClient = null;
   }
 
-  public async connect(chainIds: string[]): Promise<void> {
+  public async connect(chainIds: string[], clearRequired?: boolean): Promise<void> {
     // Initialise the sign client and event listeners if they don't already exist
     if (!this.signClient) {
       this.signClient = await SignClient.init({
@@ -128,14 +128,24 @@ export class WalletConnectV2 {
     }
 
     // Initialise a new session
-    const { uri, approval } = await this.signClient.connect({
-      requiredNamespaces: {
-        cosmos: {
-          chains: [...chainIdsSet].map((id) => this.toCosmosNamespace(id)),
-          methods: Object.values(Method),
-          events: Object.values(Event),
-        },
+    type Namespace = { cosmos: { chains: string[]; methods: Method[]; events: Event[] } };
+    const requiredNamespaces: Namespace = {
+      cosmos: {
+        chains: [...chainIdsSet].map((id) => this.toCosmosNamespace(id)),
+        methods: clearRequired ? [] : Object.values(Method),
+        events: clearRequired ? [] : Object.values(Event),
       },
+    };
+    const optionalNamespaces: Partial<Namespace> = clearRequired ? {
+      cosmos: {
+        chains: requiredNamespaces.cosmos.chains,
+        methods: Object.values(Method),
+        events: Object.values(Event),
+      }
+    } : {};
+    const { uri, approval } = await this.signClient.connect({
+      requiredNamespaces,
+      optionalNamespaces,
     });
     if (uri) {
       // Open the QR code modal and wait for the user to approve the connection
@@ -172,12 +182,16 @@ export class WalletConnectV2 {
   }
 
   public async getAccount(chainId: string): Promise<GetAccountResponse> {
-    const [res] = await this.request<GetAccountResponse[]>(
+    const response = await this.request<GetAccountResponse[] | GetAccountResponse>(
       chainId,
       Method.GET_ACCOUNTS,
       {}
     );
-    return res;
+    if (Array.isArray(response)) {
+      return response[0];
+    } else {
+      return response;
+    }
   }
 
   public async signAmino(
@@ -271,15 +285,16 @@ export class WalletConnectV2 {
     }
     const { topic } = JSON.parse(session) as StorageSession;
     if (
-      isMobile() &&
+      shouldDeepLink(this.mobileAppDetails) &&
       // GET_ACCOUNTS does not require the user to authorise
       method !== Method.GET_ACCOUNTS
     ) {
       window.location.href = isAndroid()
-        ? this.mobileAppDetails.android
-        : this.mobileAppDetails.ios;
+        ? this.mobileAppDetails.android!
+        : this.mobileAppDetails.ios!;
     }
-    return this.signClient.request<T>({
+
+    const response = await this.signClient.request<T>({
       topic,
       chainId: this.toCosmosNamespace(chainId),
       request: {
@@ -287,6 +302,12 @@ export class WalletConnectV2 {
         params,
       },
     });
+    // parse
+    if (typeof response === "string") {
+      return JSON.parse(response);
+    } else {
+      return response;
+    }
   }
 
   private toCosmosNamespace(chainId: string): string {

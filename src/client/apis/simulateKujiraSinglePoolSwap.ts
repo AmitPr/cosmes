@@ -1,3 +1,4 @@
+import { RpcClient } from "../clients/RpcClient";
 import { queryContract } from "./queryContract";
 
 export type SimulateKujiraSinglePoolSwapParams = {
@@ -17,11 +18,11 @@ type Response = {
  * `fromAmount` amount of `fromAsset` assets via the `poolId` pool.
  */
 export async function simulateKujiraSinglePoolSwap(
-  endpoint: string,
+  rpc: RpcClient,
   { poolId, fromAsset, fromAmount }: SimulateKujiraSinglePoolSwapParams
 ): Promise<bigint> {
   try {
-    const { return_amount } = await queryContract<Response>(endpoint, {
+    const { return_amount } = await queryContract<Response>(rpc, {
       address: poolId,
       query: {
         simulation: {

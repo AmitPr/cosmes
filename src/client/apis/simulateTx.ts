@@ -14,10 +14,10 @@ export type SimulateTxParams = Prettify<
  * Simulates a tx for the purpose of estimating gas fees.
  */
 export async function simulateTx(
-  endpoint: string,
+  rpc: RpcClient,
   { tx, ...params }: SimulateTxParams
 ) {
-  return RpcClient.query(endpoint, SimulateService, {
+  return rpc.query(SimulateService, {
     txBytes: tx.toUnsignedProto(params).toBinary(),
   });
 }

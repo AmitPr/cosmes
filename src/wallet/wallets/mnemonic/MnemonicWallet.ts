@@ -86,7 +86,6 @@ export class MnemonicWallet extends ConnectedWallet {
     index,
     chainId,
     gasPrice,
-    rpc,
   }: ConnectMnemonicWalletOptions) {
     const { publicKey, privateKey } = resolveKeyPair(mnemonic, {
       coinType,
@@ -109,7 +108,6 @@ export class MnemonicWallet extends ConnectedWallet {
         key: publicKey,
       }),
       address,
-      rpc,
       gasPrice
     );
     this.publicKey = base64.encode(publicKey);
@@ -148,6 +146,7 @@ export class MnemonicWallet extends ConnectedWallet {
   }
 
   public async signAndBroadcastTx(
+    rpc: RpcClient,
     { msgs, memo, timeoutHeight }: UnsignedTx,
     fee: Fee,
     accountNumber: bigint,
@@ -166,6 +165,6 @@ export class MnemonicWallet extends ConnectedWallet {
       timeoutHeight,
     });
     const signature = signDirect(doc, this.privateKey, this.keyType);
-    return RpcClient.broadcastTx(this.rpc, tx.toSignedDirect(doc, signature));
+    return rpc.broadcastTx(tx.toSignedDirect(doc, signature));
   }
 }

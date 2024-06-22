@@ -3,6 +3,7 @@ import { base16, base64 } from "cosmes/codec";
 import { CosmosTxV1beta1TxRaw as TxRaw } from "cosmes/protobufs";
 
 import { FetchClient } from "./FetchClient";
+import { RpcStatusResponse } from "./types/rpc";
 
 type ErrorResponse = {
   id: number;
@@ -58,21 +59,22 @@ type RequestMessage<T extends Message<T>> = T extends {
 }
   ? PartialMessage<T>
   : PartialMessage<T> & {
-      /**
-       * The block height at which the query should be executed. Providing a height
-       * that is outside the range of the full node will result in an error. Leave
-       * this field empty to default to the latest block.
-       */
-      height?: number | undefined;
-    };
+    /**
+     * The block height at which the query should be executed. Providing a height
+     * that is outside the range of the full node will result in an error. Leave
+     * this field empty to default to the latest block.
+     */
+    height?: number | undefined;
+  };
 
 export class RpcClient {
-  private static async doRequest<T>(
-    endpoint: string,
+  constructor(private endpoint: string) { }
+
+  private async doRequest<T>(
     method: string,
     params: JsonValue
   ) {
-    const { result, error } = await FetchClient.post<Response<T>>(endpoint, {
+    const { result, error } = await FetchClient.post<Response<T>>(this.endpoint, {
       id: Date.now(),
       jsonrpc: "2.0",
       method,
@@ -88,13 +90,11 @@ export class RpcClient {
    * Posts an ABCI query to the RPC `endpoint`. If successful, returns the response,
    * otherwise throws an error.
    */
-  public static async query<T extends Message<T>, U extends Message<U>>(
-    endpoint: string,
+  public async query<T extends Message<T>, U extends Message<U>>(
     { typeName, method, Request, Response }: QueryService<T, U>,
     requestMsg: RequestMessage<T>
   ): Promise<U> {
     const { response } = await this.doRequest<QueryResult>(
-      endpoint,
       "abci_query",
       {
         path: `/${typeName}/${method}`,
@@ -110,15 +110,21 @@ export class RpcClient {
   }
 
   /**
+   * Posts a Status query to the RPC `endpoint`. If successful, returns the response,
+   * otherwise throws an error.
+   */
+  public async status(): Promise<RpcStatusResponse> {
+    return await this.doRequest("status", {});
+  }
+
+  /**
    * Posts a `broadcast_tx_sync` request to the RPC `endpoint`. If successful,
    * returns the tx hash, otherwise throws an error.
    */
-  public static async broadcastTx(
-    endpoint: string,
+  public async broadcastTx(
     txRaw: TxRaw
   ): Promise<string> {
     const { code, log, hash } = await this.doRequest<BroadcastTxResult>(
-      endpoint,
       "broadcast_tx_sync",
       {
         tx: base64.encode(txRaw.toBinary()),
@@ -133,8 +139,8 @@ export class RpcClient {
   /**
    * Creates a new ABCI batch query.
    */
-  public static newBatchQuery(endpoint: string): BatchQuery {
-    return new BatchQuery(endpoint);
+  public newBatchQuery(): BatchQuery {
+    return new BatchQuery(this.endpoint);
   }
 }
 

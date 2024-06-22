@@ -14,11 +14,10 @@ export type QueryContractParams = {
  * and returns the parsed JSON response.
  */
 export async function queryContract<T extends JsonValue>(
-  endpoint: string,
+  rpc: RpcClient,
   { address, query }: QueryContractParams
 ): Promise<T> {
-  const { data } = await RpcClient.query(
-    endpoint,
+  const { data } = await rpc.query(
     QuerySmartContractStateService,
     {
       address,

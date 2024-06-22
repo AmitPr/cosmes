@@ -2,6 +2,7 @@ import { PlainMessage } from "@bufbuild/protobuf";
 import {
   Adapter,
   PollTxParams,
+  RpcClient,
   Secp256k1PubKey,
   Tx,
   calculateFee,
@@ -52,8 +53,6 @@ export abstract class ConnectedWallet {
   public readonly pubKey: Secp256k1PubKey;
   /** The bech32 address. */
   public readonly address: string;
-  /** The RPC endpoint to use for interacting with the chain. */
-  public readonly rpc: string;
   /** The gas price to use for transactions. */
   public readonly gasPrice: Coin;
   private accountNumber: bigint | undefined;
@@ -65,7 +64,6 @@ export abstract class ConnectedWallet {
     chainId: string,
     pubKey: Secp256k1PubKey,
     address: string,
-    rpc: string,
     gasPrice: PlainMessage<Coin>
   ) {
     this.id = id;
@@ -73,7 +71,6 @@ export abstract class ConnectedWallet {
     this.chainId = chainId;
     this.pubKey = pubKey;
     this.address = address;
-    this.rpc = rpc;
     this.gasPrice = new Coin(gasPrice);
   }
 
@@ -84,12 +81,12 @@ export abstract class ConnectedWallet {
    *
    * @throws if the account does not exist in the auth module.
    */
-  public async getAuthInfo(fromCache = false): Promise<{
+  public async getAuthInfo(rpc: RpcClient, fromCache = false): Promise<{
     accountNumber: bigint;
     sequence: bigint;
   }> {
     if (!this.accountNumber || !this.sequence || !fromCache) {
-      const account = await getAccount(this.rpc, { address: this.address });
+      const account = await getAccount(rpc, { address: this.address });
       const { accountNumber, sequence } = toBaseAccount(account);
       this.accountNumber = accountNumber;
       this.sequence = sequence;
@@ -106,12 +103,13 @@ export abstract class ConnectedWallet {
    * @throws if the tx fails to simulate.
    */
   public async estimateFee(
+    rpc: RpcClient,
     { msgs, memo }: UnsignedTx,
     feeMultiplier = 1.4
   ): Promise<Fee> {
     const estimate = async () => {
-      const { sequence } = await this.getAuthInfo(true);
-      const { gasInfo } = await simulateTx(this.rpc, {
+      const { sequence } = await this.getAuthInfo(rpc, true);
+      const { gasInfo } = await simulateTx(rpc, {
         sequence,
         memo,
         tx: new Tx({ chainId: this.chainId, pubKey: this.pubKey, msgs: msgs }),
@@ -153,9 +151,10 @@ export abstract class ConnectedWallet {
    * @throws if the user denies the signing of the tx.
    * @throws if the tx fails to broadcast.
    */
-  public async broadcastTx(unsignedTx: UnsignedTx, fee: Fee): Promise<string> {
-    const { accountNumber, sequence } = await this.getAuthInfo(true);
+  public async broadcastTx(rpc: RpcClient, unsignedTx: UnsignedTx, fee: Fee): Promise<string> {
+    const { accountNumber, sequence } = await this.getAuthInfo(rpc, true);
     const hash = await this.signAndBroadcastTx(
+      rpc,
       unsignedTx,
       fee,
       accountNumber,
@@ -174,10 +173,11 @@ export abstract class ConnectedWallet {
    * @throws if the tx is not included in a block after the given `maxAttempts`.
    */
   public async pollTx(
+    rpc: RpcClient,
     txHash: string,
     { maxAttempts, intervalSeconds }: PollTxOptions = {}
   ): Promise<Required<PlainMessage<GetTxResponse>>> {
-    return pollTx(this.rpc, {
+    return pollTx(rpc, {
       hash: txHash,
       maxAttempts,
       intervalSeconds,
@@ -191,16 +191,17 @@ export abstract class ConnectedWallet {
    * execute the three methods.
    */
   public async broadcastTxSync(
+    rpc: RpcClient,
     unsignedTx: UnsignedTx,
     feeOrFeeMultiplier: Fee | number = 1.4,
     pollOpts: PollTxOptions = {}
   ): Promise<Required<PlainMessage<GetTxResponse>>> {
     const fee =
       typeof feeOrFeeMultiplier === "number"
-        ? await this.estimateFee(unsignedTx, feeOrFeeMultiplier)
+        ? await this.estimateFee(rpc, unsignedTx, feeOrFeeMultiplier)
         : feeOrFeeMultiplier;
-    const txHash = await this.broadcastTx(unsignedTx, fee);
-    return this.pollTx(txHash, pollOpts);
+    const txHash = await this.broadcastTx(rpc, unsignedTx, fee);
+    return this.pollTx(rpc, txHash, pollOpts);
   }
 
   /**
@@ -218,6 +219,7 @@ export abstract class ConnectedWallet {
    * by the concrete child classes.
    */
   protected abstract signAndBroadcastTx(
+    rpc: RpcClient,
     unsignedTx: UnsignedTx,
     fee: Fee,
     accountNumber: bigint,

@@ -37,7 +37,7 @@ export class LeapController extends WalletController {
       this.wc.connect(chains.map(({ chainId }) => chainId))
     );
     for (let i = 0; i < chains.length; i++) {
-      const { chainId, rpc, gasPrice } = chains[i];
+      const { chainId, gasPrice } = chains[i];
       const { pubkey, address } = await WalletError.wrap(
         this.wc.getAccount(chainId)
       );
@@ -53,7 +53,6 @@ export class LeapController extends WalletController {
           chainId,
           key,
           address,
-          rpc,
           gasPrice,
           true // TODO: use sign mode direct when supported
         )
@@ -69,7 +68,7 @@ export class LeapController extends WalletController {
       throw new Error("Leap extension is not installed");
     }
     await WalletError.wrap(ext.enable(chains.map(({ chainId }) => chainId)));
-    for (const { chainId, rpc, gasPrice } of Object.values(chains)) {
+    for (const { chainId, gasPrice } of Object.values(chains)) {
       const { bech32Address, pubKey, isNanoLedger } = await WalletError.wrap(
         ext.getKey(chainId)
       );
@@ -85,7 +84,6 @@ export class LeapController extends WalletController {
           chainId,
           key,
           bech32Address,
-          rpc,
           gasPrice,
           isNanoLedger
         )
