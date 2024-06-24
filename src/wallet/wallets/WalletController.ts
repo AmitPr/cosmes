@@ -100,6 +100,7 @@ export abstract class WalletController {
         this.connectedWallets.delete(id);
       }
     }
+
     for (const cb of this.onDisconnectCbs) {
       cb(disconnectedWallets);
     }

@@ -150,8 +150,9 @@ export class WalletConnectV2 {
     if (uri) {
       // Open the QR code modal and wait for the user to approve the connection
       const modal = new QRCodeModal(this.mobileAppDetails);
-      modal.open(uri);
-      const { topic } = await approval();
+      const cancelled = modal.open(uri);
+      const approved = approval();
+      const { topic } = await Promise.race([cancelled, approved]);
       modal.close();
       // Save this new session to local storage
       const newSession: StorageSession = {

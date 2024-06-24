@@ -22,11 +22,16 @@ export class QRCodeModal implements IQRCodeModal {
   private readonly id = "wc-modal-" + Date.now();
   private readonly details: MobileAppDetails;
 
+  private reject: ((value: string) => void) | null = null;
+
   constructor(details: MobileAppDetails) {
     this.details = details;
   }
 
-  public open(uri: string): void {
+  public open(uri: string): Promise<never> {
+    const promise = new Promise<never>((_, reject) => {
+      this.reject = reject;
+    });
     const overlay = document.createElement("div");
     overlay.style.cssText = [
       "background-color: rgba(0, 0, 0, 0.5)",
@@ -45,6 +50,8 @@ export class QRCodeModal implements IQRCodeModal {
     overlay.onclick = (e): void => {
       e.stopPropagation();
       if (e.target === overlay) {
+        this.reject?.("User cancelled");
+        this.reject = null;
         this.close();
       }
     };
@@ -67,7 +74,9 @@ export class QRCodeModal implements IQRCodeModal {
     const ctx = canvas.getContext("2d");
     if (!ctx) {
       console.error("Failed to get canvas context");
-      return;
+      this.reject?.("Failed to get canvas context");
+      this.reject = null;
+      return promise;
     }
     for (let y = 0; y < qr.size; y++) {
       for (let x = 0; x < qr.size; x++) {
@@ -103,6 +112,8 @@ export class QRCodeModal implements IQRCodeModal {
     overlay.appendChild(modal);
     shadowRoot.appendChild(overlay);
     document.body.appendChild(rootDiv);
+
+    return promise;
   }
 
   public close(): void {
@@ -110,6 +121,7 @@ export class QRCodeModal implements IQRCodeModal {
     if (rootDiv) {
       document.body.removeChild(rootDiv);
     }
+    this.reject = null;
   }
 
   private generateAndroidIntent(uri: string): string {
