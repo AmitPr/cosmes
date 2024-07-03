@@ -1,5 +1,4 @@
-import { Secp256k1PubKey, getAccount, toBaseAccount } from "cosmes/client";
-import { CosmosCryptoSecp256k1PubKey } from "cosmes/protobufs";
+import { Secp256k1PubKey } from "cosmes/client";
 
 import { WalletName } from "../../constants/WalletName";
 import { WalletType } from "../../constants/WalletType";

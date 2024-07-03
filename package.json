@@ -8,11 +8,11 @@
     "src"
   ],
   "exports": {
-    "./client": "./src/client/index.js",
-    "./codec": "./src/codec/index.js",
-    "./protobufs": "./src/protobufs/index.js",
-    "./registry": "./src/registry/index.js",
-    "./wallet": "./src/wallet/index.js"
+    "./client": "./src/client/index.ts",
+    "./codec": "./src/codec/index.ts",
+    "./protobufs": "./src/protobufs/index.ts",
+    "./registry": "./src/registry/index.ts",
+    "./wallet": "./src/wallet/index.ts"
   },
   "scripts": {
     "clean": "rimraf dist",
