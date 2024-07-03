@@ -3,9 +3,29 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { MsgBurn, MsgBurnResponse, MsgChangeAdmin, MsgChangeAdminResponse, MsgCreateDenom, MsgCreateDenomResponse, MsgMint, MsgMintResponse } from "./tx_pb.js";
+import { MsgAddNoFeeAccounts, MsgAddNoFeeAccountsResponse, MsgBurn, MsgBurnResponse, MsgChangeAdmin, MsgChangeAdminResponse, MsgCreateDenom, MsgCreateDenomResponse, MsgMint, MsgMintResponse, MsgRemoveNoFeeAccounts, MsgRemoveNoFeeAccountsResponse } from "./tx_pb.js";
 
 const TYPE_NAME = "kujira.denom.Msg";
+
+/**
+ * @generated from rpc kujira.denom.Msg.AddNoFeeAccounts
+ */
+export const MsgAddNoFeeAccountsService = {
+  typeName: TYPE_NAME,
+  method: "AddNoFeeAccounts",
+  Request: MsgAddNoFeeAccounts,
+  Response: MsgAddNoFeeAccountsResponse,
+} as const;
+
+/**
+ * @generated from rpc kujira.denom.Msg.RemoveNoFeeAccounts
+ */
+export const MsgRemoveNoFeeAccountsService = {
+  typeName: TYPE_NAME,
+  method: "RemoveNoFeeAccounts",
+  Request: MsgRemoveNoFeeAccounts,
+  Response: MsgRemoveNoFeeAccountsResponse,
+} as const;
 
 /**
  * @generated from rpc kujira.denom.Msg.CreateDenom

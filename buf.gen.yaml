@@ -8,3 +8,7 @@ plugins:
     path: ./scripts/protoc-gen-cosmes.mjs
     opt: target=ts
     out: .
+  - plugin: msgs
+    path: ["bun", "run", "./scripts/protoc-gen-msgs.ts"]
+    opt: target=ts
+    out: .

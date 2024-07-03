@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse, QueryParamsRequest, QueryParamsResponse } from "./query_pb.js";
+import { QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse, QueryNoFeeAccountsRequest, QueryNoFeeAccountsResponse, QueryParamsRequest, QueryParamsResponse } from "./query_pb.js";
 
 const TYPE_NAME = "kujira.denom.Query";
 
@@ -37,5 +37,17 @@ export const QueryDenomsFromCreatorService = {
   method: "DenomsFromCreator",
   Request: QueryDenomsFromCreatorRequest,
   Response: QueryDenomsFromCreatorResponse,
+} as const;
+
+/**
+ * NoFeeAccounts returns accounts whitelisted to create denom without fee
+ *
+ * @generated from rpc kujira.denom.Query.NoFeeAccounts
+ */
+export const QueryNoFeeAccountsService = {
+  typeName: TYPE_NAME,
+  method: "NoFeeAccounts",
+  Request: QueryNoFeeAccountsRequest,
+  Response: QueryNoFeeAccountsResponse,
 } as const;
 
