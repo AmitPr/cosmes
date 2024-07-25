@@ -1,0 +1,1 @@
+{"version":3,"file":"EncodeJsonProtoAny.js","sourceRoot":"","sources":["../../../src/client/models/EncodeJsonProtoAny.ts"],"names":[],"mappings":"AAEA,MAAM,UAAU,oBAAoB,CAAC,GAAiB;IAClD,OAAO;QACH,OAAO,EAAE,GAAG,CAAC,OAAO,EAAE,CAAC,QAAQ;QAC/B,KAAK,EAAE,GAAG,CAAC,YAAY,EAAE;KAC5B,CAAC;AACN,CAAC"}

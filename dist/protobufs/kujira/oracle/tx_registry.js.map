@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../src/protobufs/kujira/oracle/tx_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,qFAAqF;AACrF,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,+BAA+B,EAAE,4BAA4B,EAAE,sBAAsB,EAAE,MAAM,YAAY,CAAC;AAEnH,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,+CAA+C,EAAE,+BAA+B;IAChF,4CAA4C,EAAE,4BAA4B;IAC1E,sCAAsC,EAAE,sBAAsB;CAC/D,CAAC"}

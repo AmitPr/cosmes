@@ -1,0 +1,1 @@
+{"version":3,"file":"calculateFee.d.ts","sourceRoot":"","sources":["../../../src/client/utils/calculateFee.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,qBAAqB,IAAI,IAAI,EAC7B,kBAAkB,IAAI,GAAG,EACzB,4BAA4B,IAAI,OAAO,EACxC,MAAM,kBAAkB,CAAC;AAE1B;;;GAGG;AACH,wBAAgB,YAAY,CAC1B,EAAE,OAAO,EAAE,EAAE,OAAO,EACpB,EAAE,MAAM,EAAE,KAAK,EAAE,EAAE,IAAI,EACvB,UAAU,SAAM,GACf,GAAG,CAWL"}

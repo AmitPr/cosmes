@@ -1,0 +1,1 @@
+{"version":3,"file":"query_registry.js","sourceRoot":"","sources":["../../../../../src/protobufs/cosmos/evidence/v1beta1/query_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,4GAA4G;AAC5G,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,uBAAuB,EAAE,oBAAoB,EAAE,MAAM,eAAe,CAAC;AAE9E,MAAM,CAAC,MAAM,aAAa,GAAG;IAC3B,uCAAuC,EAAE,oBAAoB;IAC7D,0CAA0C,EAAE,uBAAuB;CACpE,CAAC"}

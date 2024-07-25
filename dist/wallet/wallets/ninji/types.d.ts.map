@@ -1,0 +1,1 @@
+{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../../../src/wallet/wallets/ninji/types.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,iBAAiB,CAAC;AAGxC,MAAM,MAAM,KAAK,GAAG,KAAK,GAAG;IAC1B,EAAE,EAAE,CAAC,KAAK,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,IAAI,KAAK,IAAI,CAAC;CACnD,CAAC;AAEF,MAAM,MAAM,MAAM,GAAG;IACnB,KAAK,CAAC,EAAE,KAAK,GAAG,SAAS,CAAC;CAC3B,CAAC"}

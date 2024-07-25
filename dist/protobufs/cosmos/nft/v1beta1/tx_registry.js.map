@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../../src/protobufs/cosmos/nft/v1beta1/tx_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,+FAA+F;AAC/F,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,OAAO,EAAE,MAAM,YAAY,CAAC;AAErC,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,4BAA4B,EAAE,OAAO;CACtC,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"getChainRegistryAssetList.d.ts","sourceRoot":"","sources":["../../../src/registry/apis/getChainRegistryAssetList.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,sBAAsB,EAAE,MAAM,iCAAiC,CAAC;AAEzE,wBAAsB,yBAAyB,CAC7C,KAAK,EAAE,MAAM,GACZ,OAAO,CAAC,sBAAsB,CAAC,CAKjC"}

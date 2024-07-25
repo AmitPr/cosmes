@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../../src/protobufs/cosmos/upgrade/v1beta1/tx_registry.ts"],"names":[],"mappings":"AAAA,yBAAyB;AAEzB,6EAA6E;AAC7E,uGAAuG;AACvG,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,gBAAgB,EAAE,kBAAkB,EAAE,MAAM,YAAY,CAAC;AAElE,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,2CAA2C,EAAE,kBAAkB;IAC/D,yCAAyC,EAAE,gBAAgB;CAC5D,CAAC"}

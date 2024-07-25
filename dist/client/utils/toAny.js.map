@@ -1,0 +1,1 @@
+{"version":3,"file":"toAny.js","sourceRoot":"","sources":["../../../src/client/utils/toAny.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,GAAG,EAAW,MAAM,oBAAoB,CAAC;AAElD,MAAM,UAAU,KAAK,CAAC,GAAY;IAChC,OAAO,IAAI,GAAG,CAAC;QACb,OAAO,EAAE,IAAI,GAAG,CAAC,OAAO,EAAE,CAAC,QAAQ,EAAE;QACrC,KAAK,EAAE,GAAG,CAAC,QAAQ,EAAE;KACtB,CAAC,CAAC;AACL,CAAC"}

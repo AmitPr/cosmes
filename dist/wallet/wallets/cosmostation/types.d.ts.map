@@ -1,0 +1,1 @@
+{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../../../src/wallet/wallets/cosmostation/types.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,iBAAiB,CAAC;AAGxC,MAAM,MAAM,YAAY,GAAG,KAAK,CAAC;AAEjC,MAAM,MAAM,MAAM,GAAG;IACnB,YAAY,CAAC,EACT;QACE,SAAS,EAAE;YACT,KAAK,EAAE,YAAY,CAAC;SACrB,CAAC;KACH,GACD,SAAS,CAAC;CACf,CAAC"}
