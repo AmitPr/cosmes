@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../../src/protobufs/cosmos/feegrant/v1beta1/tx_registry.ts"],"names":[],"mappings":"AAAA,yBAAyB;AAEzB,6EAA6E;AAC7E,yGAAyG;AACzG,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,iBAAiB,EAAE,kBAAkB,EAAE,MAAM,YAAY,CAAC;AAEnE,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,2CAA2C,EAAE,iBAAiB;IAC9D,4CAA4C,EAAE,kBAAkB;CACjE,CAAC"}

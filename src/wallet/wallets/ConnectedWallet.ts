@@ -13,6 +13,7 @@ import {
 } from "cosmes/client";
 import {
   CosmosBaseV1beta1Coin as Coin,
+  CosmosTxV1beta1TxRaw,
   CosmosTxV1beta1Fee as Fee,
   CosmosTxV1beta1GetTxResponse as GetTxResponse,
 } from "cosmes/protobufs";
@@ -153,13 +154,8 @@ export abstract class ConnectedWallet {
    */
   public async broadcastTx(rpc: RpcClient, unsignedTx: UnsignedTx, fee: Fee): Promise<string> {
     const { accountNumber, sequence } = await this.getAuthInfo(rpc, true);
-    const hash = await this.signAndBroadcastTx(
-      rpc,
-      unsignedTx,
-      fee,
-      accountNumber,
-      sequence
-    );
+    const txRaw = await this.signTx(unsignedTx, fee, accountNumber, sequence);
+    const hash = await rpc.broadcastTx(txRaw);
     // Greedily increment the sequence for the next tx. This may result in the wrong
     // sequence, but if `estimateFee` was called prior to this, it will be corrected
     this.sequence = sequence + 1n;
@@ -218,11 +214,10 @@ export abstract class ConnectedWallet {
    * the hex encoded tx hash if successful. This abstract method should be implemented
    * by the concrete child classes.
    */
-  protected abstract signAndBroadcastTx(
-    rpc: RpcClient,
-    unsignedTx: UnsignedTx,
-    fee: Fee,
-    accountNumber: bigint,
-    sequence: bigint
-  ): Promise<string>;
+  // protected abstract signTx(
+  //   unsignedTx: UnsignedTx,
+  //   fee: Fee,
+  //   accountNumber: bigint,
+  //   sequence: bigint
+  // ): Promise<CosmosTxV1beta1TxRaw>;
 }

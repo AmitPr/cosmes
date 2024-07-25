@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../../src/protobufs/cosmos/consensus/v1/tx_registry.ts"],"names":[],"mappings":"AAAA,yBAAyB;AAEzB,6EAA6E;AAC7E,iGAAiG;AACjG,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,eAAe,EAAE,MAAM,YAAY,CAAC;AAE7C,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,qCAAqC,EAAE,eAAe;CACvD,CAAC"}

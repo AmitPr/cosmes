@@ -1,0 +1,1 @@
+{"version":3,"file":"getTx.d.ts","sourceRoot":"","sources":["../../../src/client/apis/getTx.ts"],"names":[],"mappings":"AAAA,OAAO,EACL,4BAA4B,IAAI,aAAa,EAE9C,MAAM,kBAAkB,CAAC;AAE1B,OAAO,EAAE,SAAS,EAAE,MAAM,sBAAsB,CAAC;AAEjD,MAAM,MAAM,WAAW,GAAG;IACxB,IAAI,EAAE,MAAM,CAAC;CACd,CAAC;AAEF;;GAEG;AACH,wBAAsB,KAAK,CAAC,GAAG,EAAE,SAAS,EAAE,MAAM,EAAE,WAAW,oCAM9D"}

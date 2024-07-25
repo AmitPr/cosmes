@@ -9,10 +9,11 @@ import {
  * `multiplier` can be decreased (default: `1.4`).
  */
 export function calculateFee(
-  { gasUsed }: GasInfo,
+  gasUsed: string | bigint,
   { amount, denom }: Coin,
   multiplier = 1.4
 ): Fee {
+  gasUsed = BigInt(gasUsed).toString();
   const gasLimit = Number(gasUsed) * multiplier;
   return new Fee({
     amount: [

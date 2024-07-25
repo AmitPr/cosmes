@@ -1,0 +1,1 @@
+{"version":3,"file":"reflection_registry.js","sourceRoot":"","sources":["../../../../../src/protobufs/cosmos/reflection/v1/reflection_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,2GAA2G;AAC3G,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,sBAAsB,EAAE,MAAM,oBAAoB,CAAC;AAE5D,MAAM,CAAC,MAAM,yBAAyB,GAAG;IACvC,uDAAuD,EAAE,sBAAsB;CAChF,CAAC"}

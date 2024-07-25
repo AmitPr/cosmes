@@ -1,0 +1,1 @@
+{"version":3,"file":"getChainRegistryAssetList.js","sourceRoot":"","sources":["../../../src/registry/apis/getChainRegistryAssetList.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,KAAK,UAAU,yBAAyB,CAC7C,KAAa;IAEb,MAAM,GAAG,GAAG,MAAM,KAAK,CACrB,kEAAkE,KAAK,iBAAiB,CACzF,CAAC;IACF,OAAO,GAAG,CAAC,IAAI,EAAE,CAAC;AACpB,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"WalletError.d.ts","sourceRoot":"","sources":["../../../src/wallet/wallets/WalletError.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,qBAAa,WAAY,SAAQ,KAAK;IACpC;;OAEG;IACI,GAAG,EAAE,OAAO,CAAC;gBAER,OAAO,EAAE,MAAM,EAAE,GAAG,EAAE,OAAO;IAMzC;;;;;;OAMG;WACiB,IAAI,CAAC,CAAC,EAAE,OAAO,EAAE,OAAO,CAAC,CAAC,CAAC,GAAG,OAAO,CAAC,CAAC,CAAC;CAa7D"}

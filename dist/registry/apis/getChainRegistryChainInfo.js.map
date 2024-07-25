@@ -1,0 +1,1 @@
+{"version":3,"file":"getChainRegistryChainInfo.js","sourceRoot":"","sources":["../../../src/registry/apis/getChainRegistryChainInfo.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,KAAK,UAAU,yBAAyB,CAC7C,KAAa;IAEb,MAAM,GAAG,GAAG,MAAM,KAAK,CACrB,kEAAkE,KAAK,aAAa,CACrF,CAAC;IACF,OAAO,GAAG,CAAC,IAAI,EAAE,CAAC;AACpB,CAAC"}

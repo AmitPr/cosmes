@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../../../src/protobufs/ibc/applications/transfer/v1/tx_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,mHAAmH;AACnH,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,WAAW,EAAE,MAAM,YAAY,CAAC;AAEzC,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,0CAA0C,EAAE,WAAW;CACxD,CAAC"}

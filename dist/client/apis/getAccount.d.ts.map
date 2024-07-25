@@ -1,0 +1,1 @@
+{"version":3,"file":"getAccount.d.ts","sourceRoot":"","sources":["../../../src/client/apis/getAccount.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,SAAS,EAAE,MAAM,sBAAsB,CAAC;AAEjD,MAAM,MAAM,gBAAgB,GAAG;IAC7B,OAAO,EAAE,MAAM,CAAC;CACjB,CAAC;AAEF,wBAAsB,UAAU,CAAC,GAAG,EAAE,SAAS,EAAE,MAAM,EAAE,gBAAgB,6CASxE"}

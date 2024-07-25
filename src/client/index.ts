@@ -43,3 +43,4 @@ export { calculateFee } from "./utils/calculateFee";
 export { toAny } from "./utils/toAny";
 export { toBaseAccount } from "./utils/toBaseAccount";
 export { encodeToJsonProtoAny } from './models/EncodeJsonProtoAny';
+export { CosmWasmMsgAdapters, CosmosBankMsgAdapters } from './models/Registry';

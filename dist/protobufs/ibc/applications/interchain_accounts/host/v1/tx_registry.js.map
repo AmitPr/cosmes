@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../../../../../src/protobufs/ibc/applications/interchain_accounts/host/v1/tx_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,mJAAmJ;AACnJ,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,kBAAkB,EAAE,MAAM,YAAY,CAAC;AAEhD,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,iEAAiE,EAAE,kBAAkB;CACtF,CAAC"}

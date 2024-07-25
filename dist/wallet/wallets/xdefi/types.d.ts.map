@@ -1,0 +1,1 @@
+{"version":3,"file":"types.d.ts","sourceRoot":"","sources":["../../../../src/wallet/wallets/xdefi/types.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,iBAAiB,CAAC;AAGxC,MAAM,MAAM,KAAK,GAAG,KAAK,CAAC;AAE1B,MAAM,MAAM,MAAM,GAAG;IACnB,GAAG,CAAC,EAAE,KAAK,GAAG,SAAS,CAAC;CACzB,CAAC"}

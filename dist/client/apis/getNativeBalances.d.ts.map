@@ -1,0 +1,1 @@
+{"version":3,"file":"getNativeBalances.d.ts","sourceRoot":"","sources":["../../../src/client/apis/getNativeBalances.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,SAAS,EAAE,MAAM,sBAAsB,CAAC;AAEjD,MAAM,MAAM,uBAAuB,GAAG;IACpC,OAAO,EAAE,MAAM,CAAC;CACjB,CAAC;AAEF,wBAAsB,iBAAiB,CACrC,GAAG,EAAE,SAAS,EACd,MAAM,EAAE,uBAAuB,+DAQhC"}

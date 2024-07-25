@@ -1,0 +1,1 @@
+{"version":3,"file":"tx_registry.js","sourceRoot":"","sources":["../../../src/protobufs/batch/tx_registry.ts"],"names":[],"mappings":"AAAA,6EAA6E;AAC7E,qEAAqE;AACrE,oBAAoB;AACpB,cAAc;AAEd,OAAO,EAAE,uBAAuB,EAAE,8BAA8B,EAAE,MAAM,YAAY,CAAC;AAErF,MAAM,CAAC,MAAM,WAAW,GAAG;IACzB,sCAAsC,EAAE,8BAA8B;IACtE,+BAA+B,EAAE,uBAAuB;CACzD,CAAC"}
